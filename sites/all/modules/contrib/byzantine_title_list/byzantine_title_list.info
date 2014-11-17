@@ -1,0 +1,4 @@
+name = Byzantine Title List Overrides
+description = Override default views behavior for title list
+core = 7.x
+files[] = byzantine_title_list.module

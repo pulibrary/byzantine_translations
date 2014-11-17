@@ -1,0 +1,4 @@
+<?php 
+//print("<h1>Results</h1>");
+//dpm($search_results); 
+//dpm($title);

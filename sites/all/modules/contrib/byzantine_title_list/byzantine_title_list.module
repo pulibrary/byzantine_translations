@@ -1,0 +1,49 @@
+<?php
+
+/**
+ * @file
+ * A filter that overrides the title lists default show all views display.
+ */
+
+function byzantine_title_list_help($path, $arg) {
+  swith($path) {
+    case "admin/help#byzantine_title_list":
+      return '<p>' . t("Overrides Title List Behavior") . '</p>';
+      break;
+  }
+}
+
+/**
+ * Implements hook_views_api().
+ */
+function byzantine_title_list_views_api() {
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'byzantine_title_list'), );
+}
+
+
+/**
+ * Implements hook_views_pre_build().
+ */
+
+function byzantine_title_list_views_pre_build(&$view) {
+  dpm($view);
+  if ($view->name == 'title_list') { // && $view->current_display == 'page_1') {
+    unset($view->attachment_before);
+    $view->attachment_before = t("test"); 
+    $filtered = FALSE;
+    foreach ($view->exposed_input as $name => $value) {
+      if (!empty($value) && $value != 'Any') {
+        $filtered = TRUE;
+      }
+    }
+
+    if (!$filtered) {
+      $view->executed = TRUE;
+    }
+  }
+}
+
+
+?>

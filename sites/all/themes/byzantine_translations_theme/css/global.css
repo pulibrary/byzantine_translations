@@ -1,0 +1,157 @@
+/* This file will hold the main styles for your website. */
+.search-info {
+  display: none;
+}
+
+body { 
+  background-color: #cccccc;
+}
+
+div.breadcrumb {
+  display: none;
+}
+
+h1#page-title { font-size: 24px; }
+
+/* page title */
+.site-name a {
+  color: #fa7f00;
+  font-size: 28px;
+}
+
+h2.site-name a:visited {
+  color: #fa7f00;
+}
+
+
+.item-list .node-title a {
+  text-decoration: none;
+  font-size: 20px;
+} 
+
+.field-item { padding-right: 2px;
+              padding-left: 2px;
+}
+
+.search-results .title a {
+  text-decoration: none;
+}
+
+/* header */
+.branding-data {
+  text-align: center;
+}
+
+/* secondary menu 
+.block-menu-menu-pul-links ul li { 
+  display: inline; 
+}
+*/
+/* search block */
+#block-search-form { 
+  padding-top: .2em;
+  padding-bottom: .2em;
+}
+.block-menu-menu-pul-links ul, block-menu-menu-quick-links ul { 
+  list-style-type: none;
+}
+
+#block-block-15 { padding-top: 2em; vertical-align: middle; }
+
+.logo-img { display: none; }
+
+
+/* for Views display */
+.views-row { 
+  border: thick solid #fffff; 
+}
+
+li.views-row .node-translation.node-promoted.node-teaser {
+  padding: 3px 3px 3px 3px;
+}
+/* odd even results for views */
+.views-row-even {
+  background-color: #F5F5F5;
+}
+
+.views-row-odd {
+}
+
+.node-translation, .view-content {
+  border-top: thin solid #000000;
+}
+.node-translation { 
+  padding-bottom: 10px;
+}
+
+.view-content { margin-top: 30px; }
+
+.view-content .node-translation {
+  border-top: none;
+}
+
+
+.view-content .node-title {
+  line-height: 1;
+  padding-bottom: -5px;
+}
+.feed-icon {
+  padding-bottom: 10px;
+}
+/* end views */
+
+#region-user-first {
+  background-color: #000000;
+  padding-bottom: -20px; 
+}
+
+#zone-preface-wrapper {
+  border-top: thick solid #fa7f00;
+}
+#section-content {
+  background-color: #ffffff;
+}
+
+#zone-user-wrapper { 
+  background-color: #000000;
+}
+
+#zone-menu-wrapper {
+  background-color: #fa7f00;
+}
+
+#zone-user-wrapper {
+  border-bottom: thick solid #fa7f00; 
+}
+
+#zone-branding-wrapper { 
+  background-color: #fa7f00;
+  border-top: thick solid #fa7f00;
+  border-bottom: thick solid #fa7f00;
+}
+#zone-branding { background-color: #FFFFFF; }
+
+#zone-postscript-wrapper {
+  background-color: #fa7f00;
+}
+
+#section-footer {
+  background: #cccccc;
+  padding-top: .2em;
+  border-top: thin solid #000000;  
+}
+
+#zone-postscript-wrapper { 
+  padding-top: .2em;
+}
+  
+#zone-postscript li, #region-sidebar-first li { 
+  list-style-type: none; 
+  list-style-image: none; 
+}
+
+
+
+
+
+
