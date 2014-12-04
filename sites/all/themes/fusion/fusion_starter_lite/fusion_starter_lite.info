@@ -79,9 +79,9 @@ settings[grid_adjusted_regions_fluid][content][] = sidebar_second
 ; Nested group fluid width adjustments: regions inside a parent group to subtract 
 ; to get remaining width
 settings[grid_adjusted_groups_fluid][content_group][] = sidebar_second
-; Information added by Drupal.org packaging script on 2014-09-26
-version = "7.x-2.1"
+; Information added by Drupal.org packaging script on 2014-11-25
+version = "7.x-2.2"
 core = "7.x"
 project = "fusion"
-datestamp = "1411765770"
+datestamp = "1416933220"
 

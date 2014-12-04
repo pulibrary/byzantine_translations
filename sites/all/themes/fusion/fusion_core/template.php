@@ -414,11 +414,7 @@ function fusion_core_block_list($region) {
       }
     }
     if (module_exists('block')) {
-      $drupal_list=array();
-      $list_of_blocks_per_region = _block_load_blocks();
-      if (isset($list_of_blocks_per_region[$region])) {
-        $drupal_list = $list_of_blocks_per_region[$region];
-      }
+      $drupal_list = block_list($region);
     }
   if (module_exists('context') && $context = context_get_plugin('reaction', 'block')) {
     $context_list = $context->block_list($region);
