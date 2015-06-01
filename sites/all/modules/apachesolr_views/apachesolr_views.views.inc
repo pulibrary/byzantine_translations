@@ -57,9 +57,11 @@ function apachesolr_views_views_data() {
 
       $field_type = $solr_field->type;
 
+      $field_handler = 'apachesolr_views_handler_field';
       $filter_handler = 'apachesolr_views_handler_filter';
       switch ($field_type) {
         case 'tdate':
+          $field_handler = 'apachesolr_views_handler_field_date';
           $filter_handler = 'apachesolr_views_handler_filter_date';
           break;
 
@@ -71,9 +73,9 @@ function apachesolr_views_views_data() {
 
       $data[$apachesolr_base_table][$solr_field_name] = array(
         'title' => $solr_field_name,
-        'help' => $solr_field_name,
+        'help' => filter_xss(apachesolr_field_name_map($solr_field_name)),
         'field' => array(
-          'handler' => 'apachesolr_views_handler_field',
+          'handler' => $field_handler,
           'click sortable' => TRUE,
         ),
         'filter' => array(

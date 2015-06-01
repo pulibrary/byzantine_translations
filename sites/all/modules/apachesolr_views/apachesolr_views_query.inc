@@ -16,14 +16,6 @@ class apachesolr_views_query extends views_plugin_query {
   public $orderby = array();
 
   /**
-   * Array of all encountered errors. Each of these is fatal, meaning that a
-   * non-empty $errors property will result in an empty result being returned.
-   *
-   * @var array
-   */
-  protected $errors;
-
-  /**
    * Store results of apachesolr search.
    */
   protected $apachesolr_results;
@@ -50,12 +42,6 @@ class apachesolr_views_query extends views_plugin_query {
 
     // Let the pager modify the query to add limits.
     $this->pager->query();
-
-    // Set aliases of the fields.
-    foreach ($view->field as $field_name => &$field) {
-      $field->field_alias = $field_name;
-      $field->aliases['entity_type'] = 'entity_type';
-    }
 
     // Add fields to the query so they will be shown in solr document.
     $this->params['fl'] = array_keys($view->field);
@@ -141,7 +127,13 @@ class apachesolr_views_query extends views_plugin_query {
       }
 
       $solr = apachesolr_get_solr($env_id);
-      $query = new ApachesolrViewsSolrBaseQuery('apachesolr', $solr, $this->query_params, '', current_path());
+      $context = array(
+        'search_type' => 'apachesolr_views_query',
+        'view_name' => $view->name,
+        'current_display' => $view->current_display,
+      );
+
+      $query = new ApachesolrViewsSolrBaseQuery('apachesolr', $solr, $this->query_params, '', current_path(), $context, $view);
 
       // Add sorting. The setSolrsort method can't be used, because it doesn't support multiple sorting criteria.
       $query->replaceParam('sort', $this->orderby);
@@ -164,43 +156,20 @@ class apachesolr_views_query extends views_plugin_query {
       // Store the results.
       $this->pager->total_items = $view->total_rows = $this->apachesolr_response->response->numFound;
       $this->pager->update_page_info();
-
-      // We shouldn't use $results['performance']['complete'] here, since
-      // extracting the results probably takes considerable time as well.
-      $view->execute_time = microtime(TRUE) - $start;
     }
     catch (Exception $e) {
-      $this->errors[] = $e->getMessage();
-    }
-
-    if ($this->errors) {
-      foreach ($this->errors as $msg) {
-        drupal_set_message($msg, 'error');
-      }
       $view->result = array();
       $view->total_rows = 0;
-      $view->execute_time = 0;
-      return;
+      if (!empty($view->live_preview)) {
+        drupal_set_message($e->getMessage(), 'error');
+      }
+      else {
+        vpr('Exception in @human_name[@view_name]: @message', array('@human_name' => $view->human_name, '@view_name' => $view->name, '@message' => $e->getMessage()));
+      }
     }
+
+    $view->execute_time = microtime(TRUE) - $start;
   }
-
-//  function build(&$view) {
-    // Make the query distinct if the option was set.
-//    if (!empty($this->options['distinct'])) {
-//      $this->set_distinct();
-//    }
-//
-//    // Store the view in the object to be able to use it later.
-//    $this->view = $view;
-//
-//    $view->init_pager();
-//
-//    // Let the pager modify the query to add limits.
-//    $this->pager->query();
-
-//    $view->build_info['query'] = '$this->query()';
-////    $view->build_info['count_query'] = $this->query(TRUE);
-//  }
 
   public function add_filter($type, $value, $exclude = FALSE) {
     $exclude_string = ($exclude) ? '-' : '';
@@ -220,9 +189,9 @@ class apachesolr_views_query extends views_plugin_query {
   }
 
   public function add_field($table_alias, $field, $alias = '', $params = array()) {
-    if (isset($table_alias[$field])) {
-      return $table_alias[$field];
-    }
+    // Make sure an alias is assigned.
+    $alias = $alias ? $alias : $field;
+    return $alias;
   }
 
   public function get_params() {
@@ -242,7 +211,12 @@ class apachesolr_views_query extends views_plugin_query {
         $condition_strings[] = $this->build_where_string($condition);
       }
       $condition_strings = array_filter($condition_strings);
-      return implode(' ' . $where['type'] . ' ', $condition_strings);
+      $condition_string = implode(' ' . $where['type'] . ' ', $condition_strings);
+      // Respect grouping by wrapping multiple conditions with parenthesis.
+      if (count($condition_strings) > 1) {
+        $condition_string = '(' . $condition_string . ')';
+      }
+      return $condition_string;
     }
   }
 
