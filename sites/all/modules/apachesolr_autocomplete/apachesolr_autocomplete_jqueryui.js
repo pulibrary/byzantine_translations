@@ -7,8 +7,10 @@
 Drupal.apachesolr_autocomplete = {
   processOne: function(key, settings, context) {
     // Look for items with the data-apachesolr-autocomplete-id attribute.
-    jQuery(".apachesolr-autocomplete[data-apachesolr-autocomplete-id='"+ key +"']", context)
-    .autocomplete({
+    var jquery_version = jQuery.fn.jquery.split('.');
+    var apachesolr_autocomplete_selector = ((jquery_version[0] == 1 && jquery_version[1] >= 7) || jquery_version[0] > 1) ? 'ui-autocomplete' : 'autocomplete';
+    var apachesolr_autocomplete_search = jQuery(".apachesolr-autocomplete[data-apachesolr-autocomplete-id='"+ key +"']", context);
+    apachesolr_autocomplete_search.autocomplete({
         // TODO: source should be a function, which should add any client-side filters to autocomplete request.
         source: settings.path,
         // TODO: autocomplete select event should handle more actions on select: filling/submitting the textfield, jumping to URL... others?
@@ -34,9 +36,10 @@ Drupal.apachesolr_autocomplete = {
         minLength: 2,
         delay: 400
     })
-    .addClass('form-autocomplete')
-    .data('autocomplete')._renderItem = Drupal.apachesolr_autocomplete.renderItem
-    ;
+    .addClass('form-autocomplete');
+    if (apachesolr_autocomplete_search.data(apachesolr_autocomplete_selector)) {
+      apachesolr_autocomplete_search.data(apachesolr_autocomplete_selector)._renderItem = Drupal.apachesolr_autocomplete.renderItem;
+    }
   },
     // TODO: USe JS-side theming. See http://engineeredweb.com/blog/11/5/javascript-theme-functions-drupal/
   renderItem: function (ul, item) {
