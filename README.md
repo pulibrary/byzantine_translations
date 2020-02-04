@@ -101,7 +101,7 @@
 
 1. In your browser, go to `http://byzantine.lndo.site/admin/config/search/apachesolr/settings/solr/edit?destination=admin/config/search/apachesolr/settings`
 1. Edit **Solr url** to have the value of `http://search:8983/solr/byzantine`
-1. `lando drush search-reindex` will index all content to the local solr index
+1. Go to `http://byzantine.lndo.site/admin/config/search/apachesolr/settings/solr/index` and clikc index all
 1. `lando drush cc all` will update the caches to show the data
 
 ### NPM and Gulp (TODO: do we need this? coped from RBSC)
