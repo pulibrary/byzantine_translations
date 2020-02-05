@@ -1,0 +1,23 @@
+{
+  "name": "byzantine",
+  "version": "1.0.0",
+  "description": "byzantine translations",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "@percy/script": "^1.0.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pulibrary/byzantine_translations.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pulibrary/byzantine_translations/issues"
+  },
+  "homepage": "https://github.com/pulibrary/byzantine_translations#readme"
+}
