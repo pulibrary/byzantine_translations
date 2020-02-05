@@ -7,3 +7,7 @@ sites/*/private
 
 drush/byzantine.aliases.drushrc.php
 .ssh
+percy.env
+dump.sql
+node_modules
+byzantine

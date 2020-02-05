@@ -93,6 +93,7 @@
 1. `lando db-import dump.sql`
 1. `lando drush rsync @byzantine.prod:%files @byzantine.local:%files`
 1. `lando drush uli your-username`
+1. `mkdir byzantine; cd byzantine; ln -s ../sites .; cd ..` 
 
 ### .htaccess rewrite base
 1. edit .htaccess and comment out `RewriteBase /byzantine` and uncomment `RewriteBase /`
@@ -104,9 +105,12 @@
 1. Go to `http://byzantine.lndo.site/admin/config/search/apachesolr/settings/solr/index` and clikc index all
 1. `lando drush cc all` will update the caches to show the data
 
-### NPM and Gulp (TODO: do we need this? coped from RBSC)
+### Testing
+  
+  Install the percy key locally
+  1. `cp percy.env.example to percy.env`
+  1. edit the file and put in the key from https://percy.io/Princeton-University-Library/byzantine/settings
 
-1. `cd sites/all/themes/rbsc`
-1. `lando npm install`
-1. `lando gulp deploy` (or any other gulp task)
-
+  To run the visual tests and send snapshots to percy.io
+  1. `lando test`
+  You will get a resultant build url, which you can use to see what has changed. Be aware the order of the result list seems to be random, so some changes there is to be expected.
