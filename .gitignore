@@ -4,10 +4,3 @@ sites/*/settings*.php
 # Ignore paths that contain user-generated content.
 sites/*/files
 sites/*/private
-
-drush/byzantine.aliases.drushrc.php
-.ssh
-percy.env
-dump.sql
-node_modules
-byzantine
