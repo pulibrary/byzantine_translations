@@ -5,4 +5,7 @@ sites/*/settings*.php
 sites/*/files
 sites/*/private
 
-.ssh/*
+.ssh
+node_modules
+
+drush/byzantine.aliases.drushrc.php
