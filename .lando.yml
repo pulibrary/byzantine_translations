@@ -1,7 +1,7 @@
 name: byzantine
 recipe: drupal7
 config:
-  php: '7.2'
+  php: '8.0'
   webroot: .
 services:
   search:
