@@ -9,3 +9,4 @@ sites/*/private
 node_modules
 
 drush/byzantine.aliases.drushrc.php
+log/*
