@@ -114,3 +114,7 @@
   To run the visual tests and send snapshots to percy.io
   1. `lando test`
   You will get a resultant build url, which you can use to see what has changed. Be aware the order of the result list seems to be random, so some changes there is to be expected.
+
+### Deploying
+Deployment is through capistrano. To deploy a branch other than "main", prepend an environment variable to your deploy command, e.g.:
+`BRANCH=my_feature bundle exec cap staging deploy`
