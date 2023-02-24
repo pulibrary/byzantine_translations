@@ -32,6 +32,7 @@ server "byzantine-tsp-staging1", user: fetch(:user), roles: %w{app drupal_primar
 # http://capistranorb.com/documentation/getting-started/configuration/
 # Feel free to add new variables to customise your setup.
 
+set :db_name, "byzantine_staging"
 
 
 # Custom SSH Options
