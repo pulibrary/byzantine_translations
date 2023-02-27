@@ -2,8 +2,14 @@
 sites/*/settings*.php
 
 # Ignore paths that contain user-generated content.
-sites/*/files
+sites/*/files/*
 sites/*/private
+
+# Keep the logos
+!sites/default/files/favicon_0_0.ico
+!sites/default/files/firestone-small.png
+!sites/default/files/hp_logo.jpg
+!sites/default/files/pul-logo.gif
 
 .ssh
 node_modules

@@ -15,7 +15,7 @@ set :drupal_file_temporary_path, "../../shared/tmp"
 set :drupal_file_public_path, "sites/default/files"
 
 # Default value for :linked_files is []
-append :linked_files, "#{fetch(:drupal_file_public_path)}/favicon_0_0.ico", "#{fetch(:drupal_file_public_path)}/firestone-small.png", "#{fetch(:drupal_file_public_path)}/hp_logo.jpg", "#{fetch(:drupal_file_public_path)}/pul-logo.gif"
+# append :linked_files, "#{fetch(:drupal_file_public_path)}/favicon_0_0.ico", "#{fetch(:drupal_file_public_path)}/firestone-small.png", "#{fetch(:drupal_file_public_path)}/hp_logo.jpg", "#{fetch(:drupal_file_public_path)}/pul-logo.gif"
 
 set :cas_cert_location, "/etc/ssl/certs/ssl-cert-snakeoil.pem"
 
