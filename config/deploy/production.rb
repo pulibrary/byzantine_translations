@@ -31,8 +31,7 @@ server "byzantine-tsp-prod1", user: fetch(:user), roles: %w{app drupal_primary}
 # http://capistranorb.com/documentation/getting-started/configuration/
 # Feel free to add new variables to customise your setup.
 
-server "mysql-db-prod1", user: 'pulsys', roles: %w{db}
-set :db_name, "byzantine_prod"
+
 
 # Custom SSH Options
 # ==================

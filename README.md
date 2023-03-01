@@ -89,8 +89,8 @@
       ),
     );
     ```
-1. bundle exec cap production database_dump; // this will produce a datestamped dump file in the format "backup-YYYY-MM-DD-{environment}.sql.gz".
-1. `lando db-import backup-YYYY-MM-DD-{environment}.sql.gz`
+1. `lando drush @byzantine.prod sql-dump --structure-tables-list='watchdog,sessions,cas_data_login,history,captcha_sessions,cache,cache_*' --result-file=/tmp/dump.sql; scp pulsys@libraryphp:/tmp/dump.sql .` // Change @libraryphp based on your ssh alias
+1. `lando db-import dump.sql`
 1. `lando drush rsync @byzantine.prod:%files @byzantine.local:%files`
 1. `lando drush uli your-username`
 1. `mkdir byzantine; cd byzantine; ln -s ../sites .; cd ..` 

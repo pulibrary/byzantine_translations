@@ -23,7 +23,6 @@ GEM
 
 PLATFORMS
   arm64-darwin-21
-  ruby
 
 DEPENDENCIES
   capistrano (= 3.16, < 3.17)
