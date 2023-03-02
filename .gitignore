@@ -10,3 +10,6 @@ node_modules
 
 drush/byzantine.aliases.drushrc.php
 log/*
+
+*.sql
+*.sql.gz
