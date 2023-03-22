@@ -2,7 +2,7 @@
 lock "~> 3.16.0"
 
 set :application, "byzantine"
-set :repo_url, "git@github.com:pulibrary/byzantine_translations.git"
+set :repo_url, "https://github.com/pulibrary/byzantine_translations.git"
 # Default branch is :main
 set :branch, ENV["BRANCH"] || "main"
 
