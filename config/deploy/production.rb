@@ -7,8 +7,8 @@
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
 # server "db.example.com", user: "deploy", roles: %w{db}
 
-# server "byzantine-tsp-prod1", user: fetch(:user), roles: %w{app drupal_primary}
-server "byzantine-tsp-prod2", user: fetch(:user), roles: %w{app drupal_primary}
+server "byzantine-prod1.lib.princeton.edu", user: fetch(:user), roles: %w{app drupal_primary}
+server "byzantine-prod2.lib.princeton.edu", user: fetch(:user), roles: %w{app drupal_primary}
 
 # role-based syntax
 # ==================
