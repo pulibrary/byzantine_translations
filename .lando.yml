@@ -1,42 +1,42 @@
 name: byzantine
 recipe: drupal7
 config:
-  php: '8.0'
+  php: '8.1'
   webroot: .
-  drush: '8.4.12'
-services:
-  search:
-    type: 'solr:7'
-    core: byzantine
-    portforward: 9999
-    config:
-      dir: sites/all/modules/contrib/search_api_solr/solr-conf/7.x
-  node:
-    type: 'node'
-    globals:
-    build_as_root:
-      - "apt-get update && apt-get -y install \
-          libatk-bridge2.0-0 \
-          libasound2 \
-          libgtk-3.0 \
-          libnss3 \
-          libx11-6 \
-          libx11-xcb1 \
-          libxss1 \
-          libxtst6"
-      - "npm install"
-tooling:
-  npm:
-    service: node
-  npx:
-    service: node
-  node:
-    service: node
-  gulp:
-    service: node
-  test:
-    description: run all our tests 
-    cmd:
-      - node:  npx percy exec -- node percy_snapshots.js 
-env_file:
-  - percy.env
+  drush: '^8'
+# services:
+#  search:
+#    type: 'solr:7'
+#    core: byzantine
+#    portforward: 9999
+#    config:
+#      dir: sites/all/modules/contrib/search_api_solr/solr-conf/7.x
+#  node:
+#    type: 'node'
+#    globals:
+#    build_as_root:
+#      - "apt-get update && apt-get -y install \
+#          libatk-bridge2.0-0 \
+#          libasound2 \
+#          libgtk-3.0 \
+#          libnss3 \
+#          libx11-6 \
+#          libx11-xcb1 \
+#          libxss1 \
+#          libxtst6"
+#      - "npm install"
+#tooling:
+#  npm:
+#    service: node
+#  npx:
+#    service: node
+#  node:
+#    service: node
+#  gulp:
+#    service: node
+#  test:
+#    description: run all our tests 
+#    cmd:
+#      - node:  npx percy exec -- node percy_snapshots.js 
+#env_file:
+#  - percy.env
