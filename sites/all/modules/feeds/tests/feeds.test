@@ -26,30 +26,24 @@ class FeedsWebTestCase extends DrupalWebTestCase {
 
     // Build the list of required modules which can be altered by passing in an
     // array of module names to setUp().
-    if (isset($args[0])) {
-      if (is_array($args[0])) {
-        $modules = $args[0];
-      }
-      else {
-        $modules = $args;
-      }
-    }
-    else {
-      $modules = array();
-    }
-
+    $modules = !empty($args[0]) ? (array) $args[0]: array();
     $modules[] = 'taxonomy';
     $modules[] = 'image';
     $modules[] = 'file';
     $modules[] = 'field';
     $modules[] = 'field_ui';
+    $modules[] = 'ctools';
+    $modules[] = 'entity';
     $modules[] = 'feeds';
     $modules[] = 'feeds_ui';
     $modules[] = 'feeds_tests';
-    $modules[] = 'ctools';
     $modules[] = 'job_scheduler';
     $modules = array_unique($modules);
+
     parent::setUp($modules);
+
+    // Extra clear cache to ensure all modules are loaded.
+    $this->resetAll();
 
     // Add text formats Directly.
     $filtered_html_format = array(
@@ -84,13 +78,7 @@ class FeedsWebTestCase extends DrupalWebTestCase {
 
     // Build the list of required administration permissions. Additional
     // permissions can be passed as an array into setUp()'s second parameter.
-    if (isset($args[1]) && is_array($args[1])) {
-      $permissions = $args[1];
-    }
-    else {
-      $permissions = array();
-    }
-
+    $permissions = !empty($args[1]) ? (array) $args[1]: array();
     $permissions[] = 'access content';
     $permissions[] = 'administer site configuration';
     $permissions[] = 'administer content types';
@@ -722,6 +710,20 @@ class FeedsWebTestCase extends DrupalWebTestCase {
           $file = file_unmanaged_copy("$source/$file", "$dest/$new_name");
         }
       }
+    }
+  }
+
+  /**
+   * Picks the Simple Pie library to test with based on PHP version.
+   */
+  public function downloadExtractSimplePieRecommendedVersion() {
+    if (version_compare(phpversion(), '7.2', '<')) {
+      // Version 1.7.0 is still compatible with PHP 5.6.
+      $this->downloadExtractSimplePie('1.7.0');
+    }
+    else {
+      // Version 1.8.0 requires at least PHP 7.2.
+      $this->downloadExtractSimplePie('1.8.0');
     }
   }
 

@@ -6,6 +6,8 @@ dependencies[] = ctools
 dependencies[] = job_scheduler
 
 test_dependencies[] = ctools:ctools
+test_dependencies[] = entity:entity
+test_dependencies[] = entityreference:entityreference
 test_dependencies[] = date:date
 test_dependencies[] = entity_translation:entity_translation
 test_dependencies[] = feeds_xpathparser:feeds_xpathparser
@@ -46,6 +48,7 @@ files[] = plugins/FeedsUserProcessor.inc
 ; Tests
 files[] = tests/feeds.test
 files[] = tests/common_syndication_parser.test
+files[] = tests/feeds_clean.test
 files[] = tests/feeds_content_type.test
 files[] = tests/feeds_date_time.test
 files[] = tests/feeds_entity.test
@@ -101,8 +104,8 @@ files[] = views/feeds_views_handler_field_source.inc
 files[] = views/feeds_views_handler_filter_severity.inc
 files[] = views/feeds_views_plugin_argument_validate_feed_nid.inc
 
-; Information added by Drupal.org packaging script on 2022-10-21
-version = "7.x-2.0-beta6"
+; Information added by Drupal.org packaging script on 2024-06-17
+version = "7.x-2.0"
 core = "7.x"
 project = "feeds"
-datestamp = "1666326463"
+datestamp = "1718663409"

@@ -219,7 +219,7 @@ class PuSHSubscriber {
     $sub->post_fields = array();
     $sub->save();
 
-    header('HTTP/1.1 200 "Found"', NULL, 200);
+    header('HTTP/1.1 200 "Found"', TRUE, 200);
     print check_plain($_GET['hub_challenge']);
     drupal_exit();
   }
@@ -312,7 +312,7 @@ class PuSHSubscriber {
    * Rejects a request subscription request.
    */
   protected function rejectRequest() {
-    header('HTTP/1.1 404 "Not Found"', NULL, 404);
+    header('HTTP/1.1 404 "Not Found"', TRUE, 404);
     $this->log('Could not verify subscription.', 'error');
     drupal_exit();
   }

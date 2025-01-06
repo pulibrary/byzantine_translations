@@ -26,7 +26,12 @@ class FeedsOgTest extends FeedsWebTestCase {
    * Set up test.
    */
   public function setUp() {
-    parent::setUp(array('og'));
+    parent::setUp();
+
+    // Take control the order the modules are loaded to ensure they load in the
+    // correct order.
+    module_enable(array('og', 'list', 'entityreference'), FALSE);
+    $this->resetAll();
 
     // Add OG group field to the node type 'page'.
     og_create_field(OG_GROUP_FIELD, 'node', 'page');

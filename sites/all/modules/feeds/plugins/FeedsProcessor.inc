@@ -234,7 +234,7 @@ abstract class FeedsProcessor extends FeedsPlugin {
     $entity_type = $this->entityType();
 
     // Get fields for the entity type we are mapping to.
-    $fields = field_info_instances($entity_type, $this->bundle());
+    $fields = feeds_field_info_instances($entity_type, $this->bundle());
 
     // Get targets.
     $targets = $this->getCachedTargets();
@@ -619,7 +619,7 @@ abstract class FeedsProcessor extends FeedsPlugin {
       return;
     }
 
-    if ($total = count($state->removeList)) {
+    if ($state->removeList !== NULL && ($total = count($state->removeList))) {
       $this->entityDeleteMultiple($state->removeList);
       $state->deleted += $total;
     }
@@ -861,7 +861,7 @@ abstract class FeedsProcessor extends FeedsPlugin {
   protected function map(FeedsSource $source, FeedsParserResult $result, $target_item = NULL) {
     $targets = $this->getCachedTargets();
     // Get fields for the entity type we are mapping to.
-    $fields = field_info_instances($this->entityType(), $this->bundle());
+    $fields = feeds_field_info_instances($this->entityType(), $this->bundle());
 
     if (empty($target_item)) {
       $target_item = array();
@@ -1481,7 +1481,7 @@ abstract class FeedsProcessor extends FeedsPlugin {
     foreach ($out as $key => $value) {
       if (is_string($value)) {
         if (function_exists('mb_check_encoding') && !mb_check_encoding($value, 'UTF-8')) {
-          $value = utf8_encode($value);
+          $value = mb_convert_encoding($value, 'UTF-8', 'ISO-8859-1');
         }
         $out[$key] = truncate_utf8($value, 100, FALSE, TRUE);
       }
