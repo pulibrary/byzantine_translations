@@ -114,7 +114,12 @@ class FeedsExamplesOPMLTestCase extends FeedsWebTestCase {
    * Enable feeds_news feature.
    */
   public function setUp() {
-    parent::setUp(array('feeds_news'));
+    parent::setUp();
+
+    // Take control the order the modules are loaded to ensure they load in the
+    // correct order.
+    module_enable(array('feeds_news'), FALSE);
+    $this->resetAll();
   }
 
   /**

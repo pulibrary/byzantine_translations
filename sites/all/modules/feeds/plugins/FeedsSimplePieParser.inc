@@ -80,17 +80,17 @@ class FeedsSimplePieParser extends FeedsParser {
 
     // Construct the standard form of the parsed feed.
     $result = new FeedsParserResult();
-    $result->title = html_entity_decode(($title = $parser->get_title()) ? $title : $this->createTitle($parser->get_description()));
+    $result->title = html_entity_decode(($title = $parser->get_title()) ? $title : $this->createTitle($parser->get_description()), ENT_COMPAT);
     $result->description = $parser->get_description();
-    $result->link = html_entity_decode($parser->get_link());
+    $result->link = html_entity_decode($parser->get_link(), ENT_COMPAT);
 
     $items_num = $parser->get_item_quantity();
     for ($i = 0; $i < $items_num; $i++) {
       $item = array();
       $simplepie_item = $parser->get_item($i);
-      $item['title'] = html_entity_decode(($title = $simplepie_item->get_title()) ? $title : $this->createTitle($simplepie_item->get_content()));
+      $item['title'] = html_entity_decode(($title = $simplepie_item->get_title()) ? $title : $this->createTitle($simplepie_item->get_content()), ENT_COMPAT);
       $item['description'] = $simplepie_item->get_content();
-      $item['url'] = html_entity_decode($simplepie_item->get_link());
+      $item['url'] = html_entity_decode($simplepie_item->get_link(), ENT_COMPAT);
       // Use UNIX time. If no date is defined, fall back to REQUEST_TIME.
       $item['timestamp'] = $simplepie_item->get_date("U");
       if (empty($item['timestamp'])) {
@@ -102,7 +102,7 @@ class FeedsSimplePieParser extends FeedsParser {
         $item['guid'] = $item['url'];
       }
       $author = $simplepie_item->get_author();
-      $item['author_name'] = isset($author->name) ? html_entity_decode($author->name) : '';
+      $item['author_name'] = isset($author->name) ? html_entity_decode($author->name, ENT_COMPAT) : '';
       $item['author_link'] = isset($author->link) ? $author->link : '';
       $item['author_email'] = isset($author->email) ? $author->email : '';
       // Enclosures.
@@ -229,7 +229,7 @@ class FeedsSimplePieParser extends FeedsParser {
    */
   protected function cacheDirectory() {
     $directory = 'public://simplepie';
-    file_prepare_directory($dir, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS);
+    file_prepare_directory($directory, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS);
     return $directory;
   }
 

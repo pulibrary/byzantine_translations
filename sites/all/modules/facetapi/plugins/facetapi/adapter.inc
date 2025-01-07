@@ -25,6 +25,13 @@ abstract class FacetapiAdapter {
   protected $info = array();
 
   /**
+   * Used by the automated tests, support PHP 8.2 and declare this variable.
+   *
+   * @var string
+   */
+  public $semaphore;
+
+  /**
    * The search keys, or query text, submitted by the user.
    *
    * @var string
@@ -310,7 +317,7 @@ abstract class FacetapiAdapter {
       $parts = explode(':', $filter, 2);
       // We need to filter out possible XSS attack function calls.
       foreach ($parts as $id => $part) {
-        $parts[$id] = filter_xss($part);
+        $parts[$id] = htmlspecialchars_decode(filter_xss($part));
       }
       $field_alias = rawurldecode($parts[0]);
       if (isset($parts[1]) && isset($enabled_aliases[$field_alias])) {
@@ -1176,6 +1183,7 @@ class FacetapiFacet implements ArrayAccess {
   /**
    * Implements ArrayAccess::offsetExists().
    */
+  #[\ReturnTypeWillChange]
   public function offsetExists($offset) {
     return isset($this->facet[$offset]);
   }
@@ -1183,6 +1191,7 @@ class FacetapiFacet implements ArrayAccess {
   /**
    * Implements ArrayAccess::offsetGet().
    */
+  #[\ReturnTypeWillChange]
   public function offsetGet($offset) {
     return isset($this->facet[$offset]) ? $this->facet[$offset] : NULL;
   }
@@ -1190,6 +1199,7 @@ class FacetapiFacet implements ArrayAccess {
   /**
    * Implements ArrayAccess::offsetSet().
    */
+  #[\ReturnTypeWillChange]
   public function offsetSet($offset, $value) {
     if (NULL === $offset) {
       $this->facet[] = $value;
@@ -1202,6 +1212,7 @@ class FacetapiFacet implements ArrayAccess {
   /**
    * Implements ArrayAccess::offsetUnset().
    */
+  #[\ReturnTypeWillChange]
   public function offsetUnset($offset) {
     unset($this->facet[$offset]);
   }

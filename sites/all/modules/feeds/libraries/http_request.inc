@@ -223,7 +223,7 @@ function feeds_http_request($url, array $options = array()) {
       $result->code = FEEDS_ERROR_NO_SCHEME;
     }
     else {
-      switch ($uri['scheme']) {
+      switch (strtolower($uri['scheme'])) {
         case 'http':
         case 'https':
           // Valid scheme.

@@ -36,12 +36,12 @@ abstract class FacetapiWidget {
   protected $facet;
 
   /**
-   * An array of facet settings.
+   * An object of facet settings.
    *
    * This is the the "settings" property of the facet's realm specific settings
    * returned by FacetapiAdapter::getFacetSettings().
    *
-   * @var array
+   * @var object
    */
   protected $settings;
 

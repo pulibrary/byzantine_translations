@@ -13,7 +13,6 @@
  * Feeds at some time.
  */
 class FeedsDateTimeTest extends FeedsWebTestCase {
-  protected $profile = 'testing';
 
   /**
    * {@inheritdoc}

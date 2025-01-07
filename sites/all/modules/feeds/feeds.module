@@ -326,6 +326,7 @@ function feeds_permission() {
     'administer feeds' => array(
       'title' => t('Administer Feeds'),
       'description' => t('Create, update, delete importers, execute import and delete tasks on any importer.'),
+      'restrict access' => TRUE,
     ),
   );
   foreach (feeds_importer_load_all() as $importer) {
@@ -1234,6 +1235,38 @@ function feeds_item_info_save($entity, $entity_id) {
     }
   }
 }
+
+/**
+ * Wrapper around field_info_instances().
+ *
+ * Makes output predictable by returning data always in the same structure.
+ *
+ * @return array
+ *   Returns field info, keyed by field name.
+ */
+function feeds_field_info_instances($entity_type, $bundle_name) {
+  $fields = array();
+  $info = field_info_instances($entity_type, $bundle_name);
+  if (!isset($entity_type)) {
+    // Fields are keyed by entity type and then by bundle name.
+    foreach ($info as $bundles) {
+      foreach ($bundles as $bundle_fields) {
+        $fields += array_merge($fields, $bundle_fields);
+      }
+    }
+  }
+  elseif (!isset($bundle_name)) {
+    // Fields are keyed by bundle name.
+    foreach ($info as $bundle_fields) {
+      $fields += array_merge($fields, $bundle_fields);
+    }
+  }
+  else {
+    return $info;
+  }
+  return $fields;
+}
+
 
 /**
  * @}
